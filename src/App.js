@@ -1,10 +1,14 @@
 import React from 'react';
+import ScoreSheet from './components/Yahtzee_Score_Sheet';
 
 
-const App = () => {
+function App(){
+  
 
   return (
-    <div>test hello</div>
+    <div>
+      <ScoreSheet/>
+    </div>
 
   )
 }
