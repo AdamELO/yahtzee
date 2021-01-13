@@ -1,7 +1,13 @@
-h1{
+h1 {
     color: darkviolet;
 }
-.colorhead{
-    background-color: darkviolet!important;
+
+.colorhead {
+    background-color: darkviolet !important;
     color: white;
+}
+
+.btn:focus {
+    box-shadow: none!important;
+    outline: none;
 }

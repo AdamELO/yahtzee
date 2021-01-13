@@ -11,7 +11,6 @@ function SectionSup() {
                 <ListGroup.Item as='li'>Total des 4</ListGroup.Item>
                 <ListGroup.Item as='li'>Total des 5</ListGroup.Item>
                 <ListGroup.Item as='li'>Total des 6</ListGroup.Item>
-                <ListGroup.Item as='li'>Total</ListGroup.Item>
                 <ListGroup.Item as='li'>Bonus 35 (63 pts ou plus)</ListGroup.Item>
                 <ListGroup.Item as='li'>Total section supérieur</ListGroup.Item>
             </ListGroup>
