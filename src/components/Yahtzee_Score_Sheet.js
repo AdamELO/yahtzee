@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Players from './Players';
 import SectionSup from './SectionSup';
 function ScoreSheet() {
@@ -17,15 +17,15 @@ function ScoreSheet() {
         totalAce = dice.filter(ace => ace === 1);
         setTotalAce(totalAce.length);
         totalTwo = dice.filter(Two => Two === 2);
-        setTotalTwo(totalTwo.length);
+        setTotalTwo(totalTwo.length *2);
         totalThree = dice.filter(Three => Three === 3);
-        setTotalThree(totalThree.length);
+        setTotalThree(totalThree.length *3);
         totalFour = dice.filter(Four => Four ===4);
-        setTotalFour(totalFour.length);
+        setTotalFour(totalFour.length*4);
         totalFive = dice.filter(Five => Five === 5);
-        setTotalFive(totalFive.length);
+        setTotalFive(totalFive.length*5);
         totalSix = dice.filter(Six => Six === 6);
-        setTotalSix(totalSix.length);
+        setTotalSix(totalSix.length*6);
         // totalSup = totalAce + totalFive + totalFour + totalSix +totalThree + totalTwo;
         // setTotalSup(totalSup);
     }
