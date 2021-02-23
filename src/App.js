@@ -2,12 +2,13 @@ import React from 'react';
 import ScoreSheet from './components/Yahtzee_Score_Sheet';
 
 
-function App(){
-  
+
+function App() {
+
 
   return (
     <div>
-      <ScoreSheet/>
+      <ScoreSheet />
     </div>
 
   )
