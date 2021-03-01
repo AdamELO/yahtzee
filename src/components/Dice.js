@@ -4,7 +4,7 @@
 function Players() {
 
     return (
-        <div className="box m-3">
+        <div className="box">
             <div className="dice first-face">
                 <span className="dot"> </span>
             </div>
