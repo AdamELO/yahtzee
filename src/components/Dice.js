@@ -1,4 +1,4 @@
-function Dice({dice}) {
+function Dice({dice,attempt}) {
 
     return (
         <div>
@@ -53,7 +53,7 @@ function Dice({dice}) {
             </div>
             <div className='text-center'>
                 <label className='mr-1 text-white'>garder ?</label>
-                <input type="checkbox" className='check' />
+                <input type="checkbox" disabled={attempt === 3 || attempt === 0 ? 'disabled' : ''} className='check' />
             </div>
         </div>
     )
