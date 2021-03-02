@@ -9,7 +9,7 @@ function App() {
 
   var [player, setPlayer] = useState({
     name: 'Adam',
-    attempt: 0,
+    attempt: 3,
     diceKept: [],
     diceThrow: [],
     Score: 0,
@@ -25,50 +25,72 @@ function App() {
   }
 
 
-  var [dices,setDices] = useState({
-    attempt: 3,
-    diceKept: [],
-    diceThrow: [],
-    firstDice:'1',
-    secondDice:'2',
-    thirdDice:'3',
-    fourthDice:'4',
-    fifthDice:'5',
-    rollClass: 'even-roll',
-  })
+  var [dices, setDices] = useState([
+    {
+      diceNumber: 1,
+      result: '1',
+      kept: 0,
+      rollClass: 'even-roll'
+    },
+    {
+      diceNumber: 2,
+      result: '2',
+      kept: 0,
+      rollClass: 'even-roll'
+    },
+    {
+      diceNumber: 3,
+      result: '3',
+      kept: 0,
+      rollClass: 'even-roll'
+    },
+    {
+      diceNumber: 4,
+      result: '4',
+      kept: 0,
+      rollClass: 'even-roll'
+    },
+    {
+      diceNumber: 5,
+      result: '5',
+      kept: 0,
+      rollClass: 'even-roll'
+    }
+  ])
 
-  function roll(){
+  function roll() {
+    console.log(dices);
 
-    dices.firstDice = (Math.floor(Math.random() * (6)) + 1).toString();
-    dices.secondDice = (Math.floor(Math.random() * (6)) + 1).toString();
-    dices.thirdDice = (Math.floor(Math.random() * (6)) + 1).toString();
-    dices.fourthDice = (Math.floor(Math.random() * (6)) + 1).toString();
-    dices.fifthDice = (Math.floor(Math.random() * (6)) + 1).toString();
+    // player attempts
+    let playerAttempt = player;
+    playerAttempt.attempt--;
+    
+    // dice results
+    var de = [...dices];
+    de.forEach(el => {
+      el.result = (Math.floor(Math.random() * (6)) + 1).toString();
+      el.rollClass = el.rollClass === 'even-roll' ? 'odd-roll' : 'even-roll';
 
-
-    dices.rollClass = dices.rollClass === 'even-roll' ? 'odd-roll' : 'even-roll';
-
-  
-    dices.attempt = dices.attempt + 1
-
-    const box = document.querySelectorAll('.check');
-    var garder = dices.diceKept;
-    var jeter = dices.diceThrow;
-    box.forEach((check,index) => {
-      if (check.checked) {
-        garder.push((index+1));
-      } else {
-        jeter.push((index+1));
-      }
     });
 
-    setDices(dices);
+    // setStates
+    setDices(de);
+    setPlayer(playerAttempt);
+    console.log(dices);
+
+    // const box = document.querySelectorAll('.check');
+    // var garder = dices.diceKept;
+    // var jeter = dices.diceThrow;
+    // box.forEach((check, index) => {
+    //   if (check.checked) {
+    //     garder.push((index + 1));
+    //   } else {
+    //     jeter.push((index + 1));
+    //   }
+    // });
   }
   function check() {
-    console.log(dices.firstDice,dices.secondDice,dices.thirdDice,dices.fourthDice,dices.fifthDice);
-    console.log(` encore ${dices.attempt} lancer`);
-    console.log(dices.diceKept,dices.diceThrow);
-    
+    console.log(`test`);
   }
 
   return (
@@ -80,21 +102,23 @@ function App() {
             <ScoreSheet />
           </div>
           <div className="col-2">
-            <Players player={player} attempts={dices.attempt}/>
+            <Players player={player} />
           </div>
           <div className="col-8 container">
             <div className="bg-green allCenter flex-column">
               <div className="allCenter">
                 <div className="row">
-                  <div className="col"><Dice dice={dices.firstDice} rollClass={dices.rollClass}/></div>
-                  <div className="col"><Dice dice={dices.secondDice} rollClass={dices.rollClass}/></div>
-                  <div className="col"><Dice dice={dices.thirdDice} rollClass={dices.rollClass}/></div>
-                  <div className="col"><Dice dice={dices.fourthDice} rollClass={dices.rollClass}/></div>
-                  <div className="col"><Dice dice={dices.fifthDice} rollClass={dices.rollClass}/></div>
+                  {dices.map((el, i) => {
+                    return (
+                      <div key={i} className="col">
+                        <Dice dice={el} />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="row mt-3">
-                <div className="col"><button onClick={()=>roll()} className="btn btn-danger">Lancer</button><button onClick={()=>check()}>check</button> </div>
+                <div className="col"><button onClick={() => roll()} className="btn btn-danger">Lancer</button><button onClick={() => check()}>check</button> </div>
               </div>
             </div>
           </div>

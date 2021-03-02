@@ -1,36 +1,23 @@
-function Dice({dice,rollClass}) {
+function Dice({dice}) {
 
     return (
         <div>
-            <div className={`box ${rollClass}`} data-roll={dice}>
-                <div className="dice first-face" style={{ backgroundColor: "rgb(201, 195, 195)" }}>
+            <div className={`box ${dice.rollClass}`} data-roll={dice.result}>
+                <div className="dice first-face">
                     <span className="dot"> </span>
                 </div>
-                <div className="dice second-face" style={{ backgroundColor: "rgb(201, 195, 195)" }}>
+                <div className="dice second-face">
                     <span className="dot"></span>
                     <span className="dot"></span>
                 </div>
-                <div className="dice third-face" style={{ backgroundColor: "rgb(201, 195, 195)" }}>
+                <div className="dice third-face">
                     <span className="dot"></span>
                     <span className="dot"></span>
                     <span className="dot"></span>
                 </div>
-                <div className="dice fourth-face" style={{ backgroundColor: "rgb(201, 195, 195)" }}>
+                <div className="dice fourth-face">
                     <div className="column">
                         <span className="dot"></span>
-                        <span className="dot"></span>
-                    </div>
-                    <div className="column">
-                        <span className="dot"></span>
-                        <span className="dot"></span>
-                    </div>
-                </div>
-                <div className="dice fifth-face" style={{ backgroundColor: "rgb(201, 195, 195)" }}>
-                    <div className="column">
-                        <span className="dot"></span>
-                        <span className="dot"></span>
-                    </div>
-                    <div className="column">
                         <span className="dot"></span>
                     </div>
                     <div className="column">
@@ -38,7 +25,20 @@ function Dice({dice,rollClass}) {
                         <span className="dot"></span>
                     </div>
                 </div>
-                <div className="dice sixth-face" style={{ backgroundColor: "rgb(201, 195, 195)" }}>
+                <div className="dice fifth-face">
+                    <div className="column">
+                        <span className="dot"></span>
+                        <span className="dot"></span>
+                    </div>
+                    <div className="column">
+                        <span className="dot"></span>
+                    </div>
+                    <div className="column">
+                        <span className="dot"></span>
+                        <span className="dot"></span>
+                    </div>
+                </div>
+                <div className="dice sixth-face">
                     <div className="column">
                         <span className="dot"></span>
                         <span className="dot"></span>
