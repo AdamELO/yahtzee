@@ -2,71 +2,38 @@ import React, { useState } from 'react';
 import ScoreSheet from './components/Yahtzee_Score_Sheet';
 import Players from './components/Players';
 import Dice from './components/Dice';
+import dataDices from './data/dices';
+import dataPlayer from './data/player';
+import dataScore from './data/score';
 
 
 
 function App() {
 
-  var [player, setPlayer] = useState({
-    name: 'Adam',
-    attempt: 3,
-    Score: 0,
-    Player_Name() {
-      if (player.name === '') {
-        this.name = prompt('Entrez votre nom de joueur');
-      }
-    }
-  })
+  //player data
+  var [player, setPlayer] = useState(dataPlayer)
 
-  if (player.name === '') {
-    player.Player_Name()
-  }
+  // when loading asking for player name 
+  player.Player_Name()
 
+  // dices data
+  var [dices, setDices] = useState(dataDices)
 
-  var [dices, setDices] = useState([
-    {
-      diceNumber: 1,
-      result: '1',
-      kept: false,
-      rollClass: 'even-roll'
-    },
-    {
-      diceNumber: 2,
-      result: '2',
-      kept: false,
-      rollClass: 'even-roll'
-    },
-    {
-      diceNumber: 3,
-      result: '3',
-      kept: false,
-      rollClass: 'even-roll'
-    },
-    {
-      diceNumber: 4,
-      result: '4',
-      kept: false,
-      rollClass: 'even-roll'
-    },
-    {
-      diceNumber: 5,
-      result: '5',
-      kept: false,
-      rollClass: 'even-roll'
-    }
-  ])
+  // score data
+  var [scores, setScores] = useState(dataScore)
 
+  // when rolling the dice
   function roll() {
 
     // player attempts
     let playerAttempt = player;
     playerAttempt.attempt--;
-    
+
     // dice results
     const check = document.querySelectorAll('.check');
-    var de = [...dices];
-    de.forEach((el,i) => {
-      el.kept = check[i].checked  ? true : false;
+    let de = [...dices];
+    de.forEach((el, i) => {
+      el.kept = check[i].checked ? true : false;
       if (el.kept === false) {
         el.result = (Math.floor(Math.random() * (6)) + 1).toString();
         el.rollClass = el.rollClass === 'even-roll' ? 'odd-roll' : 'even-roll';
@@ -79,9 +46,44 @@ function App() {
 
     //console check
     console.log(dices);
+    scoreSheetOne();
 
   }
-  
+
+  function scoreSheetOne() {
+
+
+    let score = scores;
+    for (let i = 1; i < 7; i++) {
+      var diceFiltered = dices.filter(dice => dice.result === `${i}`);
+      var diceSum = diceFiltered.reduce((acc, dice) => acc + parseInt(dice.result), 0);
+      switch (i) {
+        case 1:
+          score.one.result = diceSum;
+          break;
+        case 2:
+          score.two.result = diceSum;
+          break;
+        case 3:
+          score.three.result = diceSum;
+          break;
+        case 4:
+          score.four.result = diceSum;
+          break;
+        case 5:
+          score.five.result = diceSum;
+          break;
+        case 6:
+          score.six.result = diceSum;
+          break;
+        default:
+          break;
+      }
+    };
+    setScores(score);
+  }
+
+
   return (
     <div>
       <h1 className='text-center p-0 my-2'>Yahtzee</h1>
@@ -91,7 +93,7 @@ function App() {
             <ScoreSheet />
           </div>
           <div className="col-2">
-            <Players player={player} />
+            <Players player={player} score={scores} />
           </div>
           <div className="col-8 container">
             <div className="bg-green allCenter flex-column">
@@ -100,7 +102,7 @@ function App() {
                   {dices.map((el, i) => {
                     return (
                       <div key={i} className="col">
-                        <Dice dice={el} attempt={player.attempt}/>
+                        <Dice dice={el} attempt={player.attempt} />
                       </div>
                     );
                   })}
