@@ -4,7 +4,7 @@ import Players from './components/Players';
 import Dice from './components/Dice';
 import dataDices from './data/dices';
 import dataPlayer from './data/player';
-import dataScore from './data/score';
+import dataScoreSup from './data/score';
 
 
 
@@ -19,8 +19,8 @@ function App() {
   // dices data
   var [dices, setDices] = useState(dataDices)
 
-  // score data
-  var [scores, setScores] = useState(dataScore)
+  // score Sup data
+  var [scoreSup, setScoreSup] = useState(dataScoreSup)
 
   // when rolling the dice
   function roll() {
@@ -49,60 +49,16 @@ function App() {
 
     // scoresheet
     scoreSheetSup();
-
   }
 
   function scoreSheetSup() {
-    let score = scores;
-    for (let i = 1; i < 7; i++) {
-      var diceFiltered = dices.filter(dice => dice.result === `${i}`);
+    let sup = [...scoreSup];
+    sup.forEach((el) => {
+      var diceFiltered = dices.filter(dice => dice.result === `${el.scoreId}`);
       var diceSum = diceFiltered.reduce((acc, dice) => acc + parseInt(dice.result), 0);
-      switch (i) {
-        case 1:
-          score.one.result = diceSum;
-          break;
-        case 2:
-          score.two.result = diceSum;
-          break;
-        case 3:
-          score.three.result = diceSum;
-          break;
-        case 4:
-          score.four.result = diceSum;
-          break;
-        case 5:
-          score.five.result = diceSum;
-          break;
-        case 6:
-          score.six.result = diceSum;
-          break;
-        default:
-          break;
-      }
-    };
-
-    
-    //tot section sup
-    // let arrSup = [scores.one.result,scores.two.result,scores.three.result,scores.four.result,scores.five.result,scores.six.result,scores.bonus]
-    // let totsup = arrSup.reduce((acc,x)=>acc + x,0);
-    // console.log(totsup)
-    
-    //bonus
-    // totsup >=63 ? score.one.bonus = 35 : 0;
-
-    setScores(score);
-  }
-
-  function confirmedClick() {
-    // au click du badge je confirme les pts 
-    // ce qui veut dire que je l'affiche dans la partie gauche(pas le badge) et que je ne pourrai 
-    // plus voir le badge car terminado jai confirmer
-    let sco = scores;
-    sco.one.confirmed = true;
-    sco.one.resultConf = scores.one.result;
-    setScores(sco);
-    // console.log(scores.one);
-    
+      el.result = diceSum;
+    });
+    setScoreSup(sup);
   }
 
   return (
@@ -114,7 +70,7 @@ function App() {
             <ScoreSheet />
           </div>
           <div className="col-2">
-            <Players player={player} score={scores} conf={()=>confirmedClick()}/>
+            <Players player={player} scoreSup={scoreSup}/>
           </div>
           <div className="col-8 container">
             <div className="bg-green allCenter flex-column">
@@ -131,8 +87,8 @@ function App() {
               </div>
               <div className="row mt-3">
                 <div className="col">
-                  <button onClick={() => roll()} disabled={player.attempt === 0 ? 'disabled' : ''} className="btn btn-danger">Lancer</button>
-                  <button onClick={()=>confirmedClick()}>test</button>
+                  <button onClick={() => roll()} disabled={player.attempt === 0 ? 'disabled' : ''} 
+                  className="btn btn-danger">Lancer</button>
                 </div>
               </div>
             </div>
