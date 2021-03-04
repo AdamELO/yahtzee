@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ScoreSheet from './components/Yahtzee_Score_Sheet';
 import Players from './components/Players';
 import Dice from './components/Dice';
@@ -45,14 +45,14 @@ function App() {
     setPlayer(playerAttempt);
 
     //console check
-    console.log(dices);
-    scoreSheetOne();
+    // console.log(dices);
+
+    // scoresheet
+    scoreSheetSup();
 
   }
 
-  function scoreSheetOne() {
-
-
+  function scoreSheetSup() {
     let score = scores;
     for (let i = 1; i < 7; i++) {
       var diceFiltered = dices.filter(dice => dice.result === `${i}`);
@@ -80,9 +80,30 @@ function App() {
           break;
       }
     };
+
+    
+    //tot section sup
+    // let arrSup = [scores.one.result,scores.two.result,scores.three.result,scores.four.result,scores.five.result,scores.six.result,scores.bonus]
+    // let totsup = arrSup.reduce((acc,x)=>acc + x,0);
+    // console.log(totsup)
+    
+    //bonus
+    // totsup >=63 ? score.one.bonus = 35 : 0;
+
     setScores(score);
   }
 
+  function confirmedClick() {
+    // au click du badge je confirme les pts 
+    // ce qui veut dire que je l'affiche dans la partie gauche(pas le badge) et que je ne pourrai 
+    // plus voir le badge car terminado jai confirmer
+    let sco = scores;
+    sco.one.confirmed = true;
+    sco.one.resultConf = scores.one.result;
+    setScores(sco);
+    // console.log(scores.one);
+    
+  }
 
   return (
     <div>
@@ -93,7 +114,7 @@ function App() {
             <ScoreSheet />
           </div>
           <div className="col-2">
-            <Players player={player} score={scores} />
+            <Players player={player} score={scores} conf={()=>confirmedClick()}/>
           </div>
           <div className="col-8 container">
             <div className="bg-green allCenter flex-column">
@@ -111,6 +132,7 @@ function App() {
               <div className="row mt-3">
                 <div className="col">
                   <button onClick={() => roll()} disabled={player.attempt === 0 ? 'disabled' : ''} className="btn btn-danger">Lancer</button>
+                  <button onClick={()=>confirmedClick()}>test</button>
                 </div>
               </div>
             </div>
