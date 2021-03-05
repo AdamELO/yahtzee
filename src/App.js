@@ -89,7 +89,7 @@ function App() {
     // small straight
     smallStraight(inf, results);
     // large straight
-    // largeStraight(inf,results);
+    largeStraight(inf, results);
     //luck
     luck(inf, results);
     //yams
@@ -185,9 +185,21 @@ function App() {
     inf.filter(inf => inf.scoreName === 'luck')[0].result = luckResult;
   }
   function smallStraight(inf, results) {
+    const resultNoDupesAndSorted = [...new Set(results)].sort();
+    console.log(resultNoDupesAndSorted);
+
     inf.filter(inf => inf.scoreName === 'straightSm')[0].result = 30;
   }
-
+  function largeStraight(inf, results) {
+    // sort and filter results to see if there is a large straight
+    const resultNoDupesAndSorted = [...new Set(results)].sort();
+    let largeStraight = resultNoDupesAndSorted.filter(result => result >= 2 && result <= 5);
+    if (largeStraight.length === 4 && resultNoDupesAndSorted.length === 5) {
+      inf.filter(inf => inf.scoreName === 'straightL')[0].result = 40;
+    } else {
+      inf.filter(inf => inf.scoreName === 'straightL')[0].result = 0;
+    }
+  }
 
   //reset attempts and checkbox
   function resetAfterConf() {
@@ -214,8 +226,7 @@ function App() {
 
   return (
     <div>
-      <h1 className='text-center p-0 my-2'>Yahtzee</h1>
-      <div className="container-fluid">
+      <div className="container-fluid mt-5">
         <div className="row g-0">
           <div className="col-2">
             <ScoreSheet />
@@ -247,7 +258,6 @@ function App() {
         </div>
       </div>
     </div>
-
   )
 }
 
