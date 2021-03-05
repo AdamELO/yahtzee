@@ -22,12 +22,19 @@ function App() {
   // score Sup data
   let [scoreSup, setScoreSup] = useState(dataScoreSup)
 
+  // hide checkbox trur or false
+  let [hideCheckBox,setHideCheckBox] = useState(true);
+
   // when rolling the dice
   function roll() {
-
     // check attempts
     if (player.attempt === 0) {
       return alert('il ne vous reste plus de lancer, confirmer d\'abord les points pour passer à la manche suivante');
+    }
+    if (player.attempt < 4) {
+      let hide = hideCheckBox;
+      hide = false
+      setHideCheckBox(hide);
     }
     // player attempts - 1
     let playerAttempt = player;
@@ -77,9 +84,14 @@ function App() {
       el.kept = false;
     });
 
-    alert('Manche terminée, vous pouvez relancer')
+    alert('Manche terminée, vous pouvez relancer');
+    // hide checkbox
+    if (player.attempt === 3) {
+      let hide = hideCheckBox;
+      hide = true
+      setHideCheckBox(hide);
+    }
   }
-
 
   return (
     <div>
@@ -99,7 +111,7 @@ function App() {
                   {dices.map((el, i) => {
                     return (
                       <div key={i} className="col">
-                        <Dice dice={el} attempt={player.attempt} />
+                        <Dice dice={el} attempt={player.attempt} hide={hideCheckBox} />
                       </div>
                     );
                   })}
