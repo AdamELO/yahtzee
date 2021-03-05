@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ScoreSheet from './components/Yahtzee_Score_Sheet';
 import Players from './components/Players';
 import Dice from './components/Dice';
 import dataDices from './data/dices';
 import dataPlayer from './data/player';
-import dataScoreSup from './data/score';
+import dataScoreSup from './data/scoreSup';
+import dataScoreInf from './data/scoreInf';
 
 
 
 function App() {
 
   //player data
-  let [player, setPlayer] = useState(dataPlayer)
+  let [player, setPlayer] = useState(dataPlayer);
 
   // when loading asking for player name 
-  player.Player_Name()
+  player.Player_Name();
 
   // dices data
-  let [dices, setDices] = useState(dataDices)
+  let [dices, setDices] = useState(dataDices);
 
   // score Sup data
-  let [scoreSup, setScoreSup] = useState(dataScoreSup)
-
+  let [scoreSup, setScoreSup] = useState(dataScoreSup);
+  // score Inf data
+  let [scoreInf, setScoreInf] = useState(dataScoreInf);
+  console.log(scoreInf)
+  
   // hide checkbox trur or false
   let [hideCheckBox,setHideCheckBox] = useState(true);
 
@@ -102,7 +106,7 @@ function App() {
             <ScoreSheet />
           </div>
           <div className="col-2">
-            <Players player={player} scoreSup={scoreSup} reset={()=>resetAfterConf()}/>
+            <Players player={player} scoreSup={scoreSup} scoreInf={scoreInf} reset={()=>resetAfterConf()}/>
           </div>
           <div className="col-8 container">
             <div className="bg-green allCenter flex-column">

@@ -2,7 +2,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
 import { useState } from 'react';
 
-function Players({ player, scoreSup,reset }) {
+function Players({ player, scoreSup, scoreInf, reset }) {
     // scorsup clone
     let [scoreSup2, setScoreSup2] = useState(scoreSup);
 
@@ -19,7 +19,7 @@ function Players({ player, scoreSup,reset }) {
 
         // setState
         setScoreSup2(scoreSuperieur);
-        
+
         //reset attempts and checkbox
         reset();
     }
@@ -50,19 +50,19 @@ function Players({ player, scoreSup,reset }) {
                         </ListGroup.Item>
                     )
                 })
-
                 }
                 {/* attempts */}
                 <ListGroup.Item as="li" variant='secondary' className='text-center'>Lancer restants: {player.attempt}</ListGroup.Item>
                 {/* loop each inf score */}
-                <ListGroup.Item as="li" className="p-1"> <span> pts</span> </ListGroup.Item>
-                <ListGroup.Item as="li" className="p-1"> <span> pts</span> </ListGroup.Item>
-                <ListGroup.Item as="li" className="p-1"> <span> pts</span> </ListGroup.Item>
-                <ListGroup.Item as="li" className="p-1"> <span> pts</span> </ListGroup.Item>
-                <ListGroup.Item as="li" className="p-1"> <span> pts</span> </ListGroup.Item>
-                <ListGroup.Item as="li" className="p-1"> <span> pts</span> </ListGroup.Item>
-                <ListGroup.Item as="li" className="p-1"> <span> pts</span> </ListGroup.Item>
-                <ListGroup.Item as="li" className="p-1"> <span> pts</span> </ListGroup.Item>
+                {scoreInf.map((el, i) => {
+                    return (
+                        <ListGroup.Item as="li" key={i} className="p-1 d-flex justify-content-around align-items-center">
+                            <span className='bold'>{el.resultConf} pts</span>
+                            {i <= 6 ? <Badge hidden={el.confirmed || player.attempt === 3} className='btn' variant="primary">{el.result}</Badge> : ''}
+                        </ListGroup.Item>
+                    )
+                })
+                }
             </ListGroup>
         </div >
     )
