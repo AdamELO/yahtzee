@@ -98,6 +98,7 @@ function App() {
     // setState
     setScoreInf(inf);
   }
+
   // three of kind fct
   function threeOfAKind(inf, results) {
     // push all result in another array if there is three of a kind
@@ -184,12 +185,27 @@ function App() {
     let luckResult = results.reduce((acc, result) => acc + result, 0);
     inf.filter(inf => inf.scoreName === 'luck')[0].result = luckResult;
   }
+  // small straight fct
   function smallStraight(inf, results) {
+    // sorting and remove duplicates from results
     const resultNoDupesAndSorted = [...new Set(results)].sort();
-    console.log(resultNoDupesAndSorted);
 
-    inf.filter(inf => inf.scoreName === 'straightSm')[0].result = 30;
+    // check if results are consecutive numbers
+    let straightSm = [];
+    for (let i = 0; i < resultNoDupesAndSorted.length - 1; i++) {
+      if (resultNoDupesAndSorted[i] === (resultNoDupesAndSorted[i + 1] - 1)) {
+        straightSm.push(true);
+      }
+    }
+
+    //check small straight
+    if (straightSm.length >= 3) {
+      inf.filter(inf => inf.scoreName === 'straightSm')[0].result = 30;
+    } else {
+      inf.filter(inf => inf.scoreName === 'straightSm')[0].result = 0;
+    }
   }
+  //large straight fct
   function largeStraight(inf, results) {
     // sort and filter results to see if there is a large straight
     const resultNoDupesAndSorted = [...new Set(results)].sort();
