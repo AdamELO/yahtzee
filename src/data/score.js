@@ -19,44 +19,46 @@
 var dataScoreSup = [
     {
         scoreName: 'one',
-        scoreId: 1,
         confirmed: false,
         result: 0,
         resultConf: 0,
     },
     {
         scoreName: 'two',
-        scoreId: 2,
         confirmed: false,
         result: 0,
         resultConf: 0,
     },
     {
         scoreName: 'three',
-        scoreId: 3,
         confirmed: false,
         result: 0,
         resultConf: 0,
     },
     {
         scoreName: 'four',
-        scoreId: 4,
         confirmed: false,
         result: 0,
         resultConf: 0,
     },
     {
         scoreName: 'five',
-        scoreId: 5,
         confirmed: false,
         result: 0,
         resultConf: 0,
     },
     {
         scoreName: 'six',
-        scoreId: 6,
         confirmed: false,
         result: 0,
+        resultConf: 0,
+    },
+    {
+        scoreName: 'bonus',
+        resultConf: 0,
+    },
+    {
+        scoreName: 'total',
         resultConf: 0,
     },
 ]

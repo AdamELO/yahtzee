@@ -11,25 +11,29 @@ import dataScoreSup from './data/score';
 function App() {
 
   //player data
-  var [player, setPlayer] = useState(dataPlayer)
+  let [player, setPlayer] = useState(dataPlayer)
 
   // when loading asking for player name 
   player.Player_Name()
 
   // dices data
-  var [dices, setDices] = useState(dataDices)
+  let [dices, setDices] = useState(dataDices)
 
   // score Sup data
-  var [scoreSup, setScoreSup] = useState(dataScoreSup)
+  let [scoreSup, setScoreSup] = useState(dataScoreSup)
 
   // when rolling the dice
   function roll() {
 
-    // player attempts
+    // check attempts
+    if (player.attempt === 0) {
+      return alert('il ne vous reste plus de lancer, confirmer d\'abord les points pour passer à la manche suivante');
+    }
+    // player attempts - 1
     let playerAttempt = player;
     playerAttempt.attempt--;
 
-    // dice results
+    // dice results and dice animation
     const check = document.querySelectorAll('.check');
     let de = [...dices];
     de.forEach((el, i) => {
@@ -44,22 +48,38 @@ function App() {
     setDices(de);
     setPlayer(playerAttempt);
 
-    //console check
-    // console.log(dices);
-
     // scoresheet
     scoreSheetSup();
   }
 
   function scoreSheetSup() {
     let sup = [...scoreSup];
-    sup.forEach((el) => {
-      var diceFiltered = dices.filter(dice => dice.result === `${el.scoreId}`);
-      var diceSum = diceFiltered.reduce((acc, dice) => acc + parseInt(dice.result), 0);
-      el.result = diceSum;
-    });
+    for (let i = 0; i < 6; i++) {
+      let diceFiltered = dices.filter(dice => dice.result === `${i + 1}`);
+      let diceSum = diceFiltered.reduce((acc, dice) => acc + parseInt(dice.result), 0);
+      sup[i].result = diceSum;
+    }
+    // setState
     setScoreSup(sup);
   }
+
+  //reset attempts and checkbox
+  function resetAfterConf() {
+    // attempts
+    let playerAtt = player;
+    playerAtt.attempt = 3;
+    setPlayer(playerAtt);
+
+    // checkbox
+    const check = document.querySelectorAll('.check');
+    dices.forEach((el, i) => {
+      check[i].checked = false;
+      el.kept = false;
+    });
+
+    alert('Manche terminée, vous pouvez relancer')
+  }
+
 
   return (
     <div>
@@ -70,7 +90,7 @@ function App() {
             <ScoreSheet />
           </div>
           <div className="col-2">
-            <Players player={player} scoreSup={scoreSup}/>
+            <Players player={player} scoreSup={scoreSup} reset={()=>resetAfterConf()}/>
           </div>
           <div className="col-8 container">
             <div className="bg-green allCenter flex-column">
@@ -87,8 +107,8 @@ function App() {
               </div>
               <div className="row mt-3">
                 <div className="col">
-                  <button onClick={() => roll()} disabled={player.attempt === 0 ? 'disabled' : ''} 
-                  className="btn btn-danger">Lancer</button>
+                  <button onClick={() => roll()}
+                    className="btn btn-danger">Lancer</button>
                 </div>
               </div>
             </div>
