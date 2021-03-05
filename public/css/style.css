@@ -197,6 +197,6 @@
 }
 
 /* tot pts bold  */
-.bold:last-child {
+ul li:nth-child(9n) {
   font-weight: bolder;
 }

@@ -8,7 +8,6 @@ import dataScoreSup from './data/scoreSup';
 import dataScoreInf from './data/scoreInf';
 
 
-
 function App() {
 
   //player data
@@ -24,16 +23,15 @@ function App() {
   let [scoreSup, setScoreSup] = useState(dataScoreSup);
   // score Inf data
   let [scoreInf, setScoreInf] = useState(dataScoreInf);
-  console.log(scoreInf)
-  
+
   // hide checkbox trur or false
-  let [hideCheckBox,setHideCheckBox] = useState(true);
+  let [hideCheckBox, setHideCheckBox] = useState(true);
 
   // when rolling the dice
   function roll() {
     // check attempts
     if (player.attempt === 0) {
-      return alert('il ne vous reste plus de lancer, confirmer d\'abord les points pour passer à la manche suivante');
+      return alert('Il ne vous reste plus de lancer, confirmer d\'abord les points pour passer à la manche suivante');
     }
     if (player.attempt < 4) {
       let hide = hideCheckBox;
@@ -61,6 +59,7 @@ function App() {
 
     // scoresheet
     scoreSheetSup();
+    scoreSheetInf();
   }
 
   function scoreSheetSup() {
@@ -73,6 +72,122 @@ function App() {
     // setState
     setScoreSup(sup);
   }
+
+  function scoreSheetInf() {
+    let inf = [...scoreInf];
+    // push all results in array
+    let results = [];
+    dices.forEach(el => {
+      results.push(parseInt(el.result));
+    });
+    // three of a kind
+    threeOfAKind(inf, results);
+    // four of a kind
+    fourOfAKind(inf, results);
+    //full
+    full(inf, results);
+    // small straight
+    smallStraight(inf, results);
+    // large straight
+    // largeStraight(inf,results);
+    //luck
+    luck(inf, results);
+    //yams
+    yams(inf, results);
+
+    // setState
+    setScoreInf(inf);
+  }
+  // three of kind fct
+  function threeOfAKind(inf, results) {
+    // push all result in another array if there is three of a kind
+    let threeOfAKind = [];
+    const tempArray = [...results].sort()
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i + 2] === tempArray[i]) {
+        threeOfAKind.push(tempArray[i]);
+      }
+    }
+
+    // check if three of a kind array is nul if not multiply result by 3
+    if (threeOfAKind.length !== 0) {
+      let threeOfAKindResult = threeOfAKind[0] * 3;
+      inf.filter(inf => inf.scoreName === 'threeOfAKind')[0].result = threeOfAKindResult;
+    } else {
+      inf.filter(inf => inf.scoreName === 'threeOfAKind')[0].result = 0;
+    }
+  }
+  //four of kind fct
+  function fourOfAKind(inf, results) {
+    // push all result in another array if there is four of a kind
+    let fourOfAKind = [];
+    const tempArray = [...results].sort()
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i + 3] === tempArray[i]) {
+        fourOfAKind.push(tempArray[i]);
+      }
+    }
+
+    // check if four of a kind array is nul if not multiply result by 4
+    if (fourOfAKind.length !== 0) {
+      let fourOfAKindResult = fourOfAKind[0] * 4;
+      inf.filter(inf => inf.scoreName === 'fourOfAKind')[0].result = fourOfAKindResult;
+    } else {
+      inf.filter(inf => inf.scoreName === 'fourOfAKind')[0].result = 0;
+    }
+  }
+  //Yams fct
+  function yams(inf, results) {
+    // push all result in another array if there is yams
+    let yams = [];
+    const tempArray = [...results].sort()
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i + 4] === tempArray[i]) {
+        yams.push(tempArray[i]);
+      }
+    }
+
+    // check if yams array is nul if not + 50 pts
+    if (yams.length !== 0) {
+      inf.filter(inf => inf.scoreName === 'yams')[0].result = 50;
+    } else {
+      inf.filter(inf => inf.scoreName === 'yams')[0].result = 0;
+    }
+  }
+  function full(inf, results) {
+    // push all result in another array if there is a full
+    let full = [];
+    //checking for three same dices
+    const tempArray = [...results].sort();
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i + 2] === tempArray[i]) {
+        full.push(tempArray[i]);
+      }
+    }
+    //checking for two same dices
+    const tempArray2 = [...results].sort();
+    for (let i = 0; i < tempArray2.length; i++) {
+      if (tempArray2[i + 1] === tempArray2[i]) {
+        full.push(tempArray2[i]);
+      }
+    }
+    //checking full and if there is a full : +25pts
+    if (full.length === 4) {
+      inf.filter(inf => inf.scoreName === 'full')[0].result = 25;
+    } else {
+      inf.filter(inf => inf.scoreName === 'full')[0].result = 0;
+    }
+  }
+  // luck fct
+  function luck(inf, results) {
+    // sum all results
+    let luckResult = results.reduce((acc, result) => acc + result, 0);
+    inf.filter(inf => inf.scoreName === 'luck')[0].result = luckResult;
+  }
+  function smallStraight(inf, results) {
+    inf.filter(inf => inf.scoreName === 'straightSm')[0].result = 30;
+  }
+
 
   //reset attempts and checkbox
   function resetAfterConf() {
@@ -106,7 +221,7 @@ function App() {
             <ScoreSheet />
           </div>
           <div className="col-2">
-            <Players player={player} scoreSup={scoreSup} scoreInf={scoreInf} reset={()=>resetAfterConf()}/>
+            <Players player={player} scoreSup={scoreSup} scoreInf={scoreInf} reset={() => resetAfterConf()} />
           </div>
           <div className="col-8 container">
             <div className="bg-green allCenter flex-column">

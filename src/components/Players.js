@@ -30,10 +30,10 @@ function Players({ player, scoreSup, scoreInf, reset }) {
         for (let i = 0; i < scoreSuperieur.length - 1; i++) {
             scoreSupWithoutTot.push(scoreSuperieur[i]);
         }
-        scoreSuperieur[7].resultConf = scoreSupWithoutTot.reduce((acc, el) => acc + el.resultConf, 0);
-
+        scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf = scoreSupWithoutTot.reduce((acc, el) => acc + el.resultConf, 0);
+        
         // bonus
-        scoreSuperieur[7].resultConf >= 63 ? scoreSuperieur[6].resultConf = 35 : scoreSuperieur[6].resultConf = 0;
+        scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf >= 63 ? scoreSuperieur.filter(sup =>sup.scoreName ==='bonus')[0].resultConf = 35 : scoreSuperieur.filter(sup =>sup.scoreName ==='bonus')[0].resultConf = 0;
     }
 
     return (
@@ -44,9 +44,9 @@ function Players({ player, scoreSup, scoreInf, reset }) {
                 {/* loop each sup score */}
                 {scoreSup.map((el, i) => {
                     return (
-                        <ListGroup.Item as="li" key={i} className="p-1 d-flex justify-content-around align-items-center">
+                        <ListGroup.Item as="li" key={i} className="p-1 d-flex justify-content-around align-items-center bold">
                             <span>{el.resultConf} pts</span>
-                            {i <= 5 ? <Badge hidden={el.confirmed || player.attempt === 3} onClick={() => adding(i)} className='btn' variant="primary">{el.result}</Badge> : ''}
+                            {i <= (scoreInf.length - 2) ? <Badge hidden={el.confirmed || player.attempt === 3} onClick={() => adding(i)} className='btn' variant="primary">{el.result}</Badge> : ''}
                         </ListGroup.Item>
                     )
                 })
@@ -56,9 +56,9 @@ function Players({ player, scoreSup, scoreInf, reset }) {
                 {/* loop each inf score */}
                 {scoreInf.map((el, i) => {
                     return (
-                        <ListGroup.Item as="li" key={i} className="p-1 d-flex justify-content-around align-items-center">
-                            <span className='bold'>{el.resultConf} pts</span>
-                            {i <= 6 ? <Badge hidden={el.confirmed || player.attempt === 3} className='btn' variant="primary">{el.result}</Badge> : ''}
+                        <ListGroup.Item as="li" key={i} className="p-1 d-flex justify-content-around align-items-center bold">
+                            <span>{el.resultConf} pts</span>
+                            {i <= (scoreInf.length - 1) ? <Badge hidden={el.confirmed || player.attempt === 3} className='btn' variant="primary">{el.result}</Badge> : ''}
                         </ListGroup.Item>
                     )
                 })

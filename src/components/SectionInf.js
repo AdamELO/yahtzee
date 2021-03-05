@@ -12,7 +12,7 @@ function SectionInf() {
                 <ListGroup.Item as='li' className="p-1">Grande Suite</ListGroup.Item>
                 <ListGroup.Item as='li' className="p-1">Chance</ListGroup.Item>
                 <ListGroup.Item as='li' className="p-1">Yams</ListGroup.Item>
-                <ListGroup.Item as='li' className="p-1 font-weight-bold">Total</ListGroup.Item>
+                <ListGroup.Item as='li' className="p-1">Total</ListGroup.Item>
             </ListGroup>
         </div>
     )

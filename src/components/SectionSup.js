@@ -12,7 +12,7 @@ function SectionSup() {
                 <ListGroup.Item as='li' className="p-1">Total des 5</ListGroup.Item>
                 <ListGroup.Item as='li' className="p-1">Total des 6</ListGroup.Item>
                 <ListGroup.Item as='li' className="p-1">Bonus 35 (63 pts+)</ListGroup.Item>
-                <ListGroup.Item as='li' className="p-1 font-weight-bold">Total section supérieur</ListGroup.Item>
+                <ListGroup.Item as='li' className="p-1">Total section supérieur</ListGroup.Item>
             </ListGroup>
         </div>
     )
