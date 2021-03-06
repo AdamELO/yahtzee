@@ -1,5 +1,5 @@
 var dataPlayer = {
-    name: 'Adam',
+    name: '',
     attempt: 3,
     Player_Name() {
         if (this.name === '') {
