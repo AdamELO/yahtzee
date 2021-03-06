@@ -5,8 +5,9 @@ import { useState } from 'react';
 function Players({ player, scoreSup, scoreInf, reset }) {
     // scorsup clone
     let [scoreSup2, setScoreSup2] = useState(scoreSup);
+    let [scoreInf2, setScoreInf2] = useState(scoreInf);
 
-    function adding(i) {
+    function addingSup(i) {
         //making array clone
         let scoreSuperieur = [...scoreSup2];
 
@@ -15,7 +16,7 @@ function Players({ player, scoreSup, scoreInf, reset }) {
         scoreSuperieur[i].resultConf = scoreSup[i].result;
 
         // bonus & tot sup sum
-        addingSupTotBonus(scoreSuperieur);
+        addingSupTotBonus(scoreSuperieur, i);
 
         // setState
         setScoreSup2(scoreSuperieur);
@@ -23,17 +24,35 @@ function Players({ player, scoreSup, scoreInf, reset }) {
         //reset attempts and checkbox
         reset();
     }
-
-    function addingSupTotBonus(scoreSuperieur) {
+    function addingSupTotBonus(scoreSuperieur, i) {
         // tot sup
-        let scoreSupWithoutTot = [];
-        for (let i = 0; i < scoreSuperieur.length - 1; i++) {
-            scoreSupWithoutTot.push(scoreSuperieur[i]);
-        }
-        scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf = scoreSupWithoutTot.reduce((acc, el) => acc + el.resultConf, 0);
-        
+        scoreSuperieur.filter(sup => sup.scoreName === 'total')[0].resultConf += scoreSuperieur[i].resultConf
+        //tot overall
+        addingTot(scoreSuperieur, i)
+
         // bonus
-        scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf >= 63 ? scoreSuperieur.filter(sup =>sup.scoreName ==='bonus')[0].resultConf = 35 : scoreSuperieur.filter(sup =>sup.scoreName ==='bonus')[0].resultConf = 0;
+        scoreSuperieur.filter(sup => sup.scoreName === 'total')[0].resultConf >= 63 ? scoreSuperieur.filter(sup => sup.scoreName === 'bonus')[0].resultConf = 35 : scoreSuperieur.filter(sup => sup.scoreName === 'bonus')[0].resultConf = 0;
+    }
+    
+    function addingInf(i) {
+        //making array clone
+        let scoreinferieur = [...scoreInf2];
+
+        //confirm result
+        scoreinferieur[i].confirmed = true;
+        scoreinferieur[i].resultConf = scoreInf[i].result;
+
+        //total
+        addingTot(scoreinferieur, i);
+
+        // setState
+        setScoreInf2(scoreinferieur);
+
+        //reset attempts and checkbox
+        reset();
+    }
+    function addingTot(score, i) {
+        scoreInf[scoreInf.length - 1].resultConf += score[i].resultConf;
     }
 
     return (
@@ -46,7 +65,7 @@ function Players({ player, scoreSup, scoreInf, reset }) {
                     return (
                         <ListGroup.Item as="li" key={i} className="p-1 d-flex justify-content-around align-items-center bold">
                             <span>{el.resultConf} pts</span>
-                            {i <= (scoreInf.length - 2) ? <Badge hidden={el.confirmed || player.attempt === 3} onClick={() => adding(i)} className='btn' variant="primary">{el.result}</Badge> : ''}
+                            {i <= (scoreInf.length - 2) ? <Badge hidden={el.confirmed || player.attempt === 3} onClick={() => addingSup(i)} className='btn' variant="primary">{el.result}</Badge> : ''}
                         </ListGroup.Item>
                     )
                 })
@@ -58,7 +77,7 @@ function Players({ player, scoreSup, scoreInf, reset }) {
                     return (
                         <ListGroup.Item as="li" key={i} className="p-1 d-flex justify-content-around align-items-center bold">
                             <span>{el.resultConf} pts</span>
-                            {i <= (scoreInf.length - 1) ? <Badge hidden={el.confirmed || player.attempt === 3} className='btn' variant="primary">{el.result}</Badge> : ''}
+                            {i <= (scoreInf.length - 1) ? <Badge hidden={el.confirmed || player.attempt === 3} onClick={() => addingInf(i)} className='btn' variant="primary">{el.result}</Badge> : ''}
                         </ListGroup.Item>
                     )
                 })

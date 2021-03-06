@@ -219,6 +219,27 @@ function App() {
 
   //reset attempts and checkbox
   function resetAfterConf() {
+    //check if game is finished
+    let scoreConfirmation = [];
+    for (let i = 0; i < scoreSup.length - 2; i++) {
+      if (scoreSup[i].confirmed === true) {
+        scoreConfirmation.push(true);
+      }
+    }
+    for (let i = 0; i < scoreInf.length - 1; i++) {
+      if (scoreInf[i].confirmed === true) {
+        scoreConfirmation.push(true);
+      }
+    }
+    if (scoreConfirmation.length === 13) {
+      alert(`vous avez terminé avec un score de ${scoreInf[scoreInf.length - 1].resultConf}`);
+      return document.location.reload();
+    }
+
+    // game not done yet
+    alert('Manche terminée, vous pouvez relancer');
+
+
     // attempts
     let playerAtt = player;
     playerAtt.attempt = 3;
@@ -231,7 +252,7 @@ function App() {
       el.kept = false;
     });
 
-    alert('Manche terminée, vous pouvez relancer');
+
     // hide checkbox
     if (player.attempt === 3) {
       let hide = hideCheckBox;
