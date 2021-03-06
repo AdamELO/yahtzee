@@ -233,11 +233,12 @@ function App() {
     }
     if (scoreConfirmation.length === 13) {
       alert(`vous avez terminé avec un score de ${scoreInf[scoreInf.length - 1].resultConf}`);
-      return document.location.reload();
+      document.location.reload();
+    }else{
+      // game not done yet
+      alert('Manche terminée, vous pouvez relancer');
     }
 
-    // game not done yet
-    alert('Manche terminée, vous pouvez relancer');
 
 
     // attempts

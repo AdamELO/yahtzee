@@ -16,7 +16,8 @@ function Players({ player, scoreSup, scoreInf, reset }) {
         scoreSuperieur[i].resultConf = scoreSup[i].result;
 
         // bonus & tot sup sum
-        addingSupTotBonus(scoreSuperieur, i);
+        addingSupTotBonus(scoreSuperieur);
+        addingTot();
 
         // setState
         setScoreSup2(scoreSuperieur);
@@ -24,16 +25,6 @@ function Players({ player, scoreSup, scoreInf, reset }) {
         //reset attempts and checkbox
         reset();
     }
-    function addingSupTotBonus(scoreSuperieur, i) {
-        // tot sup
-        scoreSuperieur.filter(sup => sup.scoreName === 'total')[0].resultConf += scoreSuperieur[i].resultConf
-        //tot overall
-        addingTot(scoreSuperieur, i)
-
-        // bonus
-        scoreSuperieur.filter(sup => sup.scoreName === 'total')[0].resultConf >= 63 ? scoreSuperieur.filter(sup => sup.scoreName === 'bonus')[0].resultConf = 35 : scoreSuperieur.filter(sup => sup.scoreName === 'bonus')[0].resultConf = 0;
-    }
-    
     function addingInf(i) {
         //making array clone
         let scoreinferieur = [...scoreInf2];
@@ -43,7 +34,7 @@ function Players({ player, scoreSup, scoreInf, reset }) {
         scoreinferieur[i].resultConf = scoreInf[i].result;
 
         //total
-        addingTot(scoreinferieur, i);
+        addingTot();
 
         // setState
         setScoreInf2(scoreinferieur);
@@ -51,8 +42,25 @@ function Players({ player, scoreSup, scoreInf, reset }) {
         //reset attempts and checkbox
         reset();
     }
-    function addingTot(score, i) {
-        scoreInf[scoreInf.length - 1].resultConf += score[i].resultConf;
+
+    function addingSupTotBonus(scoreSuperieur) {
+        // tot sup
+        var totSup = scoreSuperieur[7].resultConf;
+        scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf = scoreSuperieur.reduce((acc, el) => acc + el.resultConf, 0) - totSup;
+
+        // bonus
+        scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf >= 63 ? scoreSuperieur.filter(sup =>sup.scoreName ==='bonus')[0].resultConf = 35 : scoreSuperieur.filter(sup =>sup.scoreName ==='bonus')[0].resultConf = 0;
+
+        // tot sup to add bonus eventually
+        var totSup = scoreSuperieur[7].resultConf;
+        scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf = scoreSuperieur.reduce((acc, el) => acc + el.resultConf, 0) - totSup;
+    }
+    function addingTot() {
+        let scoreInfWithoutTot = [];
+        for (let i = 0; i < scoreInf.length -1 ; i++) {
+            scoreInfWithoutTot.push(scoreInf[i]);
+        }
+        scoreInf.filter(tot =>tot.scoreName ==='total')[0].resultConf = scoreSup[scoreSup.length -1].resultConf + scoreInfWithoutTot.reduce((acc,el)=>acc+el.resultConf,0);
     }
 
     return (
