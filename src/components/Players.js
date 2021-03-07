@@ -52,7 +52,7 @@ function Players({ player, scoreSup, scoreInf, reset }) {
         scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf >= 63 ? scoreSuperieur.filter(sup =>sup.scoreName ==='bonus')[0].resultConf = 35 : scoreSuperieur.filter(sup =>sup.scoreName ==='bonus')[0].resultConf = 0;
 
         // tot sup to add bonus eventually
-        var totSup = scoreSuperieur[7].resultConf;
+        totSup = scoreSuperieur[7].resultConf;
         scoreSuperieur.filter(sup =>sup.scoreName ==='total')[0].resultConf = scoreSuperieur.reduce((acc, el) => acc + el.resultConf, 0) - totSup;
     }
     function addingTot() {

@@ -219,6 +219,11 @@ function App() {
 
   //reset attempts and checkbox
   function resetAfterConf() {
+    // player score
+    let scorePlayer = player;
+    player.score = scoreInf[scoreInf.length - 1].resultConf;
+    setPlayer(scorePlayer);
+    
     //check if game is finished
     let scoreConfirmation = [];
     for (let i = 0; i < scoreSup.length - 2; i++) {
@@ -232,7 +237,7 @@ function App() {
       }
     }
     if (scoreConfirmation.length === 13) {
-      alert(`vous avez terminé avec un score de ${scoreInf[scoreInf.length - 1].resultConf}`);
+      alert(`vous avez terminé avec un score de ${player.score}`);
       document.location.reload();
     }else{
       // game not done yet
