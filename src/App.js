@@ -8,14 +8,32 @@ import dataScoreSup from './data/scoreSup';
 import dataScoreInf from './data/scoreInf';
 import scoreInfFct from './fct/scoreInf';
 
-
 function App() {
 
   //player data
   let [player, setPlayer] = useState(dataPlayer);
 
-  // when loading asking for player name 
-  player.Player_Name();
+  // set player name 
+  let [inputName, setInputName] = useState("");
+
+  let [visible, setVisible] = useState(true);
+
+  function onChangeName(e) {
+    setInputName(e.target.value);
+  }
+  function player_name() {
+    var playername = player;
+    if (inputName !== "") {
+      playername.name = inputName;
+      setPlayer(playername);
+      // setInputName("");
+
+      // fade modal
+      setVisible(false);
+    } else {
+      alert('veuillez introduire votre nom SVP');
+    }
+  }
 
   // dices data
   let [dices, setDices] = useState(dataDices);
@@ -27,6 +45,8 @@ function App() {
 
   // hide checkbox trur or false
   let [hideCheckBox, setHideCheckBox] = useState(true);
+  //modal
+  // let [modal, setModal] = useState(true);
 
   // when rolling the dice
   function roll() {
@@ -89,14 +109,13 @@ function App() {
     setScoreInf(inf);
   }
 
-
   //reset attempts and checkbox
   function resetAfterConf() {
     // player score
     let scorePlayer = player;
     player.score = scoreInf[scoreInf.length - 1].resultConf;
     setPlayer(scorePlayer);
-    
+
     //check if game is finished
     let scoreConfirmation = [];
     for (let i = 0; i < scoreSup.length - 2; i++) {
@@ -112,12 +131,11 @@ function App() {
     if (scoreConfirmation.length === 13) {
       alert(`vous avez terminé avec un score de ${player.score}`);
       document.location.reload();
-    }else{
+    } else {
       // game not done yet
-      alert('Manche terminée, vous pouvez relancer');
+      // alert('Manche terminée, vous pouvez relancer');
+      setVisible(true);
     }
-
-
 
     // attempts
     let playerAtt = player;
@@ -140,8 +158,19 @@ function App() {
     }
   }
 
+
   return (
     <div>
+      <div className={visible ? 'fadein' : 'fadeout'}>
+        <div className="card">
+          <h1 className='text-center'>Introduisez votre nom de joueur</h1>
+          <div class="form__group field mx-auto d-flex mt-2">
+            <input onChange={(e) => onChangeName(e)} type="input" className="form__field" placeholder="Nom" required />
+            <label forHtml="name" className="form__label">Nom:</label>
+            <btn onClick={() => player_name()} className="btn colorhead mt-3">ok</btn>
+          </div>
+        </div>
+      </div>
       <div className="container-fluid mt-5">
         <div className="row g-0">
           <div className="col-2">
