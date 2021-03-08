@@ -1,4 +1,4 @@
-function Dice({dice,attempt,hide}) {
+function Dice({dice,hide}) {
 
     return (
         <div>

@@ -7,16 +7,20 @@ import dataPlayer from './data/player';
 import dataScoreSup from './data/scoreSup';
 import dataScoreInf from './data/scoreInf';
 import scoreInfFct from './fct/scoreInf';
+import Name from "./components/Name";
+import NextRound from "./components/NextRound";
 
 function App() {
-
   //player data
   let [player, setPlayer] = useState(dataPlayer);
 
   // set player name 
   let [inputName, setInputName] = useState("");
 
+  //modal
   let [visible, setVisible] = useState(true);
+
+  let [textModal, setTextModal] = useState(`Manche terminée, vous pouvez relancer`);
 
   function onChangeName(e) {
     setInputName(e.target.value);
@@ -24,12 +28,9 @@ function App() {
   function player_name() {
     var playername = player;
     if (inputName !== "") {
+      setVisible(false);
       playername.name = inputName;
       setPlayer(playername);
-      // setInputName("");
-
-      // fade modal
-      setVisible(false);
     } else {
       alert('veuillez introduire votre nom SVP');
     }
@@ -45,8 +46,6 @@ function App() {
 
   // hide checkbox trur or false
   let [hideCheckBox, setHideCheckBox] = useState(true);
-  //modal
-  // let [modal, setModal] = useState(true);
 
   // when rolling the dice
   function roll() {
@@ -129,11 +128,10 @@ function App() {
       }
     }
     if (scoreConfirmation.length === 13) {
-      alert(`vous avez terminé avec un score de ${player.score}`);
-      document.location.reload();
+      setTextModal(`vous avez terminé avec un score de ${player.score}`);
+      setVisible(true);
     } else {
       // game not done yet
-      // alert('Manche terminée, vous pouvez relancer');
       setVisible(true);
     }
 
@@ -149,7 +147,6 @@ function App() {
       el.kept = false;
     });
 
-
     // hide checkbox
     if (player.attempt === 3) {
       let hide = hideCheckBox;
@@ -158,18 +155,17 @@ function App() {
     }
   }
 
-
+  function modalEndTurn() {
+    if (textModal === `Manche terminée, vous pouvez relancer`) {
+      setVisible(false);
+    } else {
+      document.location.reload();
+    }
+  }
   return (
     <div>
       <div className={visible ? 'fadein' : 'fadeout'}>
-        <div className="card">
-          <h1 className='text-center'>Introduisez votre nom de joueur</h1>
-          <div class="form__group field mx-auto d-flex mt-2">
-            <input onChange={(e) => onChangeName(e)} type="input" className="form__field" placeholder="Nom" required />
-            <label forHtml="name" className="form__label">Nom:</label>
-            <btn onClick={() => player_name()} className="btn colorhead mt-3">ok</btn>
-          </div>
-        </div>
+        {player.name === '' ? <Name visible={visible} player_name={() => player_name()} onChangeName={(e) => onChangeName(e)} /> : <NextRound textModal={textModal} modalEndTurn={() => modalEndTurn()} />}
       </div>
       <div className="container-fluid mt-5">
         <div className="row g-0">
