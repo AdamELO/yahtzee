@@ -52,7 +52,6 @@ function Dice({dice,attempt,hide}) {
                 </div>
             </div>
             <div className='text-center' hidden={hide}>
-                <label className='mr-1 text-white'>garder ?</label>
                 <input type="checkbox" className='check' />
             </div>
         </div>
