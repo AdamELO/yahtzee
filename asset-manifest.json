@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/yahtzee/static/js/main.f0f5fbb7.chunk.js",
+    "main.js.map": "/yahtzee/static/js/main.f0f5fbb7.chunk.js.map",
+    "runtime-main.js": "/yahtzee/static/js/runtime-main.9eabaa98.js",
+    "runtime-main.js.map": "/yahtzee/static/js/runtime-main.9eabaa98.js.map",
+    "static/css/2.ae9f1eb3.chunk.css": "/yahtzee/static/css/2.ae9f1eb3.chunk.css",
+    "static/js/2.6d6490b4.chunk.js": "/yahtzee/static/js/2.6d6490b4.chunk.js",
+    "static/js/2.6d6490b4.chunk.js.map": "/yahtzee/static/js/2.6d6490b4.chunk.js.map",
+    "index.html": "/yahtzee/index.html",
+    "static/css/2.ae9f1eb3.chunk.css.map": "/yahtzee/static/css/2.ae9f1eb3.chunk.css.map",
+    "static/js/2.6d6490b4.chunk.js.LICENSE.txt": "/yahtzee/static/js/2.6d6490b4.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9eabaa98.js",
+    "static/css/2.ae9f1eb3.chunk.css",
+    "static/js/2.6d6490b4.chunk.js",
+    "static/js/main.f0f5fbb7.chunk.js"
+  ]
+}

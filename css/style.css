@@ -1,0 +1,317 @@
+#bg-wood {
+  background-image: url('../img/wood.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.colorhead {
+  background-color: darkviolet !important;
+  color: white;
+}
+
+.btn:focus {
+  box-shadow: none !important;
+  outline: none;
+}
+
+.bg-green {
+  background-image: url('../img/green.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.allCenter {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+
+/* dice */
+
+.box {
+  width: 104px;
+  height: 104px;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+
+.dice {
+  background-color: rgb(201, 195, 195);
+  width: 104px;
+  height: 104px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
+.dot {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+/* first */
+.first-face {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateZ(52px);
+}
+
+/* second */
+.second-face {
+  display: flex;
+  justify-content: space-between;
+  transform: rotateY(270deg) translateX(-52px);
+  transform-origin: center left;
+}
+
+.second-face .dot:nth-of-type(2) {
+  align-self: flex-end;
+}
+
+/* third */
+.third-face {
+  display: flex;
+  justify-content: space-between;
+  transform: rotateX(-90deg) translateZ(-52px);
+}
+
+.third-face .dot:nth-of-type(2) {
+  align-self: center;
+}
+
+.third-face .dot:nth-of-type(3) {
+  align-self: flex-end;
+}
+
+/* fourth */
+.fourth-face {
+  display: flex;
+  justify-content: space-between;
+  transform: rotateX(-90deg) translateZ(52px);
+}
+
+.fourth-face .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* fifth */
+.fifth-face {
+  display: flex;
+  justify-content: space-between;
+  transform: rotateY(-270deg) translateX(52px);
+  transform-origin: top right;
+}
+
+.fifth-face .column:nth-of-type(2) {
+  justify-content: center;
+}
+
+.fifth-face .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* sixth */
+.sixth-face {
+  display: flex;
+  justify-content: space-between;
+  transform: translateZ(-52px) rotateY(180deg);
+}
+
+.sixth-face .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* anim dice roll */
+.even-roll {
+  transition: transform 1.5s ease-out;
+}
+
+.odd-roll {
+  transition: transform 1.25s ease-out;
+}
+
+.even-roll[data-roll="1"] {
+  transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg);
+}
+
+.even-roll[data-roll="2"] {
+  transform: rotateX(360deg) rotateY(810deg) rotateZ(360deg);
+}
+
+.even-roll[data-roll="3"] {
+  transform: rotateX(270deg) rotateY(720deg) rotateZ(360deg);
+}
+
+.even-roll[data-roll="4"] {
+  transform: rotateX(450deg) rotateY(720deg) rotateZ(360deg);
+}
+
+.even-roll[data-roll="5"] {
+  transform: rotateX(360deg) rotateY(630deg) rotateZ(360deg);
+}
+
+.even-roll[data-roll="6"] {
+  transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg);
+}
+
+.odd-roll[data-roll="1"] {
+  transform: rotateX(-360deg) rotateY(-720deg) rotateZ(-360deg);
+}
+
+.odd-roll[data-roll="2"] {
+  transform: rotateX(-360deg) rotateY(-630deg) rotateZ(-360deg);
+}
+
+.odd-roll[data-roll="3"] {
+  transform: rotateX(-450deg) rotateY(-720deg) rotateZ(-360deg);
+}
+
+.odd-roll[data-roll="4"] {
+  transform: rotateX(-270deg) rotateY(-720deg) rotateZ(-360deg);
+}
+
+.odd-roll[data-roll="5"] {
+  transform: rotateX(-360deg) rotateY(-810deg) rotateZ(-360deg);
+}
+
+.odd-roll[data-roll="6"] {
+  transform: rotateX(-360deg) rotateY(-900deg) rotateZ(-360deg);
+}
+
+/* tot pts bold  */
+ul li:nth-child(9n) {
+  font-weight: bolder;
+}
+
+/* modal */
+.fadein{
+  position: fixed;
+  opacity: 1;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  z-index: 999;
+  animation: modalAnimIn 2s;
+}
+@keyframes modalAnimIn{
+  from{
+    top: -25%;
+    opacity: 0;
+  }
+}
+
+.fadeout{
+  position: fixed;
+  opacity: 0;
+  top: 125%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  z-index: 999;
+  animation: modalAnimOut 2s;
+}
+@keyframes modalAnimOut{
+  from{
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+
+.card {
+	border-radius: 15px;
+	height: 35vh;
+	overflow: hidden;
+	position: relative;
+	width: 50vw;
+}
+
+.card:before {
+	background-color: rgba(129, 24, 150, 0.63);
+	content: "";
+	height: 100%;
+	position: absolute;
+	width: 100%;
+}
+
+/* form */
+
+.form__group {
+	position: relative;
+	padding: 15px 0 0;
+	margin-top: 10px;
+	width: 50%;
+}
+
+.form__field {
+	font-family: inherit;
+	width: 100%;
+	border: 0;
+	border-bottom: 2px solid white;
+	outline: 0;
+	font-size: 1.3rem;
+	color: #fff;
+	padding: 7px 0;
+	background: transparent;
+}
+
+.form__field::placeholder {
+	color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+	font-size: 1.3rem;
+	cursor: text;
+	top: 20px;
+}
+
+.form__label {
+	position: absolute;
+	top: 0;
+	display: block;
+	transition: 0.2s;
+	font-size: 1rem;
+	color: white;
+}
+
+.form__field:focus {
+	padding-bottom: 6px;
+	border-width: 3px;
+}
+
+.form__field:focus ~ .form__label {
+	position: absolute;
+	top: 0;
+	display: block;
+	transition: 0.2s;
+	font-size: 12px;
+	color: white;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+	box-shadow: none;
+}
+
+
+
+
