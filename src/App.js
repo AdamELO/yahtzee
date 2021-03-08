@@ -51,7 +51,8 @@ function App() {
   function roll() {
     // check attempts
     if (player.attempt === 0) {
-      return alert('Il ne vous reste plus de lancer, confirmer d\'abord les points pour passer à la manche suivante');
+      setTextModal(`Il ne vous reste plus de lancer, confirmer d\'abord les points pour passer à la manche suivante`);
+      return setVisible(true);
     }
     if (player.attempt < 4) {
       let hide = hideCheckBox;
@@ -132,6 +133,7 @@ function App() {
       setVisible(true);
     } else {
       // game not done yet
+      setTextModal(`Manche terminée, vous pouvez relancer`);
       setVisible(true);
     }
 
@@ -156,10 +158,10 @@ function App() {
   }
 
   function modalEndTurn() {
-    if (textModal === `Manche terminée, vous pouvez relancer`) {
-      setVisible(false);
-    } else {
+    if (textModal === `vous avez terminé avec un score de ${player.score}`) {
       document.location.reload();
+    } else {
+      setVisible(false);
     }
   }
   return (
