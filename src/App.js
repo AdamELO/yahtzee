@@ -51,7 +51,7 @@ function App() {
   function roll() {
     // check attempts
     if (player.attempt === 0) {
-      setTextModal(`Il ne vous reste plus de lancer, confirmer d\'abord les points pour passer à la manche suivante`);
+      setTextModal(`Il ne vous reste plus de lancer, confirmer d'abord les points pour passer à la manche suivante`);
       return setVisible(true);
     }
     if (player.attempt < 4) {
