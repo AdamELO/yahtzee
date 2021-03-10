@@ -313,5 +313,28 @@ ul li:nth-child(9n) {
 }
 
 
+/* media queries */
+@media (max-width: 768px){
+  .card{
+    height: 200px!important;
+    width: 400px!important;
+  }
+  .bg-green{
+    background-image: none;
+  }
+  #diceResp{
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+    margin: 5px!important;
+  }
+  .fontsizeResp{
+    font-size: 20px;
+  }
+}
 
-
+@media (min-width: 992px) and (max-width:1180px){
+  .longScoreFontSize{
+    font-size: 12px!important;
+  }
+}
