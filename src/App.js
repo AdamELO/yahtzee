@@ -171,13 +171,13 @@ function App() {
       </div>
       <div className="container-fluid mt-5">
         <div className="row g-0">
-          <div className="col-2">
+          <div className="col-lg-2 mx-auto">
             <ScoreSheet />
           </div>
-          <div className="col-2">
+          <div className="col-lg-2 mx-auto">
             <Players player={player} scoreSup={scoreSup} scoreInf={scoreInf} reset={() => resetAfterConf()} />
           </div>
-          <div className="col-8 container">
+          <div className="col-lg-8 col-sm-12 col-md-12 container">
             <div className="bg-green allCenter flex-column">
               <div className="allCenter">
                 <div className="row">

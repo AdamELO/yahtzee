@@ -1,7 +1,7 @@
 function Dice({dice,hide}) {
 
     return (
-        <div>
+        <div id='diceResp'>
             <div className={`box ${dice.rollClass}`} data-roll={dice.result}>
                 <div className="dice first-face">
                     <span className="dot"> </span>
@@ -51,7 +51,7 @@ function Dice({dice,hide}) {
                     </div>
                 </div>
             </div>
-            <div className='text-center' hidden={hide}>
+            <div className='text-center m-1' hidden={hide}>
                 <input type="checkbox" className='check' />
             </div>
         </div>

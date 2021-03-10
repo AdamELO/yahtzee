@@ -4,7 +4,7 @@ function SectionInf() {
     return (
         <div>
             <ListGroup as='ul'>
-                <ListGroup.Item as='li' className="colorhead text-center">Section Inférieur</ListGroup.Item>
+                <ListGroup.Item as='li' className="colorhead text-center longScoreFontSize">Section Inférieur</ListGroup.Item>
                 <ListGroup.Item as='li' className="p-1">Brelan</ListGroup.Item>
                 <ListGroup.Item as='li' className="p-1">Carré</ListGroup.Item>
                 <ListGroup.Item as='li' className="p-1">Full</ListGroup.Item>

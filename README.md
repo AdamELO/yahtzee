@@ -1,13 +1,12 @@
-# 1 player Yahtzee game
+# Yahtzee game
 - React
 - Bootstrap
 
-## install
+## install & start
 - npm i 
-
-## start
 - npm start
+### Or Try it here: https://adamelo.github.io/yahtzee/
 
-## info
+## additional info
 - game is in french
-- responsive coming soon
+- 1 player

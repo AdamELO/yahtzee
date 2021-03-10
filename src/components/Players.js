@@ -64,10 +64,10 @@ function Players({ player, scoreSup, scoreInf, reset }) {
     }
 
     return (
-        <div className="container">
+        <div >
             <ListGroup as="ul">
                 {/* player name */}
-                <ListGroup.Item as="li" variant='secondary' className='text-center'>{player.name}</ListGroup.Item>
+                <ListGroup.Item as="li" variant='secondary' className='text-center longScoreFontSize'>{player.name}</ListGroup.Item>
                 {/* loop each sup score */}
                 {scoreSup.map((el, i) => {
                     return (
@@ -79,7 +79,7 @@ function Players({ player, scoreSup, scoreInf, reset }) {
                 })
                 }
                 {/* attempts */}
-                <ListGroup.Item as="li" variant='secondary' className='text-center'>Lancer restants: {player.attempt}</ListGroup.Item>
+                <ListGroup.Item as="li" variant='secondary' className='text-center longScoreFontSize'>Lancer restants: {player.attempt}</ListGroup.Item>
                 {/* loop each inf score */}
                 {scoreInf.map((el, i) => {
                     return (
